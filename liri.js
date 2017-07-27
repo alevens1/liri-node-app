@@ -1,3 +1,5 @@
+
+
 var Twitter = require('twitter');
 
 var client = new Twitter({
@@ -12,4 +14,30 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
     console.log(tweets);
   }
+
+  for (var index = 0, index < tweets.statuses.length; index++){
+  	var tweet-text= tweets.statuses[index].text;
+  	var tweet-time = tweets.statuses[index].created_at;
+  	console.log('==============================');
+  	console.log(tweet-text);
+  	console.log(tweet-time);
+  }
 });
+
+// var request = process.argv[3];
+
+// switch (request){
+// 	case "my-tweets",
+// 	myTweets(),
+// 	break;
+
+// 	case "spotify-this-song",
+// 	mySongs();
+// 	break;
+
+// 	case "movie-this",
+// 	movieThis();
+// 	break;
+
+// }
+
