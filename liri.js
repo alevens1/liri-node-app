@@ -1,6 +1,7 @@
-
+'use strict'
 
 var Twitter = require('twitter');
+var request = process.argv[3];
 
 var client = new Twitter({
   consumer_key: 'elE9WhvGMqjnduv5rvRo4vwmD',
@@ -9,35 +10,99 @@ var client = new Twitter({
   access_token_secret: 'gxqumueGttfsK0bcQToGxRwn2DuSwU1QI7zSxs885sk3I'
 });
  
-var params = {screen_name: 'PinkLady_z'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
+var params = {screen_name: 'PinkLady_z', text: "======="};
 
-  for (var index = 0, index < tweets.statuses.length; index++){
-  	var tweet-text= tweets.statuses[index].text;
-  	var tweet-time = tweets.statuses[index].created_at;
-  	console.log('==============================');
-  	console.log(tweet-text);
-  	console.log(tweet-time);
-  }
-});
 
-// var request = process.argv[3];
+function myTweets(){
+      client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (!error) {
+          for (var i = 0, i < tweets.statuses.length; i++){
+              var tweetText= tweets.statuses[i].text;
+              var tweetTime = tweets.statuses[i].created_at;
+              console.log('==============================');
+              console.log(tweetText);
+              console.log(tweetTime);
+              console.log(tweets);
+            }
+           }
+         }
+      });
 
-// switch (request){
-// 	case "my-tweets",
-// 	myTweets(),
-// 	break;
 
-// 	case "spotify-this-song",
-// 	mySongs();
-// 	break;
 
-// 	case "movie-this",
-// 	movieThis();
-// 	break;
+var OMDB = require('request');
+var request = process.argv[2];
+ request.get('http://www.omdbapi.com', function (error, response, body) {
+   console.log('error:', error); 
+   console.log('')
+   //console.log('statusCode:', response && response.statusCode);  
+   //console.log('body:', body);  
+ });
 
+
+ var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+ 
+
+
+
+  switch (request){
+  case "my-tweets",
+  myTweets(),
+  break;
+
+  case "movie-this",
+  movieInfo(),
+  break;
+ }
+
+ myTweets();
+ movieInfo();
+     
+
+// movieYear 
+// movieRatingIMDB 
+// movieCountry 
+// movieLanguage 
+// moviePlot 
+// movie Actors 
+// movieRatingRotten 
+
+
+
+// for (var i = 2; i < movies.length; i++) {
+
+//  if (i > 2 && i < movies.length) {
+
+//     movieName = movieName + "+" + movieArgs[i];
+
+//   }
+
+//   else {
+
+//     movieName += movieArgs[i];
+
+//   }
 // }
+
+// var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+
+// console.log(queryUrl);
+
+// request(queryUrl, function(error, response, body) {
+
+//   if (!error && response.statusCode === 200) {
+
+//    console.log("Release Year: " + JSON.parse(body).Year);
+//    console.log("IMDB Rating: " + JSON.parse(body).Rating);
+//    console.log("Country: " + JSON.parse(body).Country);
+//    console.log("Language: " + JSON.parse(body).Language);
+//    console.log("Plot: " + JSON.parse(body).Plot);
+//    console.log("Actors: " + JSON.parse(body).Actors);
+//    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).);
+//   }
+// });
+
+
+
+
 
